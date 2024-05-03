@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/32/B题单片机主机（暂定稿）/User",
-      "program": "c:/32/B题单片机主机（暂定稿）/User/build/Debug/outDebug",
+      "cwd": "c:/32/光通信",
+      "program": "c:/32/光通信/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
