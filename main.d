@@ -45,3 +45,4 @@
 .\main.o: .\Hardware\lcd.h
 .\main.o: .\Driver\sys.h
 .\main.o: .\Hardware\lcd_init.h
+.\main.o: .\Driver\DAC.h

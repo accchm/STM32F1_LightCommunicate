@@ -1,5 +1,5 @@
-.\dac.o: DAC.c
-.\dac.o: DAC.h
+.\dac.o: Driver\DAC.c
+.\dac.o: Driver\DAC.h
 .\dac.o: .\Start\stm32f10x.h
 .\dac.o: .\Start\core_cm3.h
 .\dac.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

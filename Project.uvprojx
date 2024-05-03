@@ -763,12 +763,12 @@
             <File>
               <FileName>DAC.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\DAC.c</FilePath>
+              <FilePath>.\Driver\DAC.c</FilePath>
             </File>
             <File>
               <FileName>DAC.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\DAC.h</FilePath>
+              <FilePath>.\Driver\DAC.h</FilePath>
             </File>
           </Files>
         </Group>
