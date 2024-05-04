@@ -80,8 +80,8 @@ Section Cross References
     startup_stm32f10x_hd.o(RESET) refers to exti.o(i.EXTI15_10_IRQHandler) for EXTI15_10_IRQHandler
     startup_stm32f10x_hd.o(.text) refers to system_stm32f10x.o(i.SystemInit) for SystemInit
     startup_stm32f10x_hd.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
-    main.o(i.Send_Wendu) refers to ffixui.o(.text) for __aeabi_f2uiz
     main.o(i.Send_Wendu) refers to delay.o(i.Delay_ms) for Delay_ms
+    main.o(i.Send_Wendu) refers to ffixui.o(.text) for __aeabi_f2uiz
     main.o(i.Send_Wendu) refers to fmul.o(.text) for __aeabi_fmul
     main.o(i.main) refers to oled.o(i.OLED_Init) for OLED_Init
     main.o(i.main) refers to dac.o(i.DAC1_Triangle_Wave) for DAC1_Triangle_Wave
@@ -1281,7 +1281,7 @@ Removing Unused input sections from the image.
     Removing system_stm32f10x.o(i.SystemCoreClockUpdate), (164 bytes).
     Removing system_stm32f10x.o(.data), (20 bytes).
     Removing startup_stm32f10x_hd.o(HEAP), (512 bytes).
-    Removing main.o(i.Send_Wendu), (140 bytes).
+    Removing main.o(i.Send_Wendu), (180 bytes).
     Removing menu.o(i.Fun_1), (136 bytes).
     Removing menu.o(i.Fun_10), (40 bytes).
     Removing menu.o(i.Fun_2), (136 bytes).
@@ -1396,7 +1396,7 @@ Removing Unused input sections from the image.
     Removing dflti.o(.text), (34 bytes).
     Removing dfixi.o(.text), (62 bytes).
 
-575 unused section(s) (total 46145 bytes) removed from the image.
+575 unused section(s) (total 46185 bytes) removed from the image.
 
 ==============================================================================
 

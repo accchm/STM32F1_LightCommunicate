@@ -32,6 +32,13 @@ void Send_Wendu(float wendu)
 {
     uint16_t temp = 0;
     uint8_t i = 0;
+
+    TIM6->PSC = 36;
+    Delay_ms(50);
+    TIM6->PSC = 72;
+    Delay_ms(50);
+    TIM6->PSC = 36;
+    Delay_ms(50);                    //ÆðÊ¼ÐÅºÅ
     temp = (uint16_t)(wendu);
     for(i = 0;i < 6;i++)
     {
@@ -60,5 +67,6 @@ void Send_Wendu(float wendu)
         }
         Delay_ms(50);
     }
+    TIM6->PSC = 72;
 }
 
