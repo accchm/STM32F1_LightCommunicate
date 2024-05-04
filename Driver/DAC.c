@@ -4,9 +4,9 @@
 uint16_t g_Wave1[128];
 void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
 {
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);	
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1,ENABLE);
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2,ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
     //GPIOA
@@ -22,18 +22,22 @@ void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
         TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
         TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);   
         TIM_TimeBaseStructure.TIM_Period = 2 - 1;                        //
-        TIM_TimeBaseStructure.TIM_Prescaler = 72 - 1;         
+        TIM_TimeBaseStructure.TIM_Prescaler = 32
+        
+        
+        
+         - 1;         
         TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;      
         TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //设为向上计数  
-        TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure); 
-        TIM_SelectOutputTrigger(TIM2, TIM_TRGOSource_Update);
+        TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure); 
+        TIM_SelectOutputTrigger(TIM6, TIM_TRGOSource_Update);
     }
     //DAC
     {
         DAC_InitTypeDef DAC_InitStrcuture;
         DAC_InitStrcuture.DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bit0;
         DAC_InitStrcuture.DAC_OutputBuffer = DAC_OutputBuffer_Disable;              //不使用缓冲区
-        DAC_InitStrcuture.DAC_Trigger = DAC_Trigger_T2_TRGO;                       //定时器2触发
+        DAC_InitStrcuture.DAC_Trigger = DAC_Trigger_T6_TRGO;                       //定时器2触发
         DAC_InitStrcuture.DAC_WaveGeneration = DAC_WaveGeneration_None;
         DAC_Init(DAC_Channel_1,&DAC_InitStrcuture);
     }
@@ -51,40 +55,40 @@ void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
         DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;                               //外设地址不自增
         DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;								//模式，选择循环模式，与ADC的连续转换一致
         DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;          //优先级
-        DMA_Init(DMA1_Channel1,&DMA_InitStructure);
+        DMA_Init(DMA2_Channel3,&DMA_InitStructure);
     }
     DAC_DMACmd(DAC_Channel_1, ENABLE);
-    DMA_Cmd(DMA1_Channel1,ENABLE);              //DMA使能
+    DMA_Cmd(DMA2_Channel3,ENABLE);              //DMA使能
     DAC_Cmd(DAC_Channel_1, ENABLE);
 //    DAC_SetDualChannelData(DAC_Align_12b_R, 0, 0);
-    TIM_Cmd(TIM2,ENABLE);
+    TIM_Cmd(TIM6,ENABLE);
 }
 
 void DAC1_Triangle_Wave(uint16_t low, uint16_t high)
 {
-    uint16_t m = 64, dac;
+    uint16_t m = 32, dac;
     uint8_t i = 0;
-    TIM_Cmd(TIM2,DISABLE);
+    TIM_Cmd(TIM6,DISABLE);
 	
 	if (m == 0)
 	{
 		m = 1;
 	}
 	
-	if (m > 127)
+	if (m > 63)
 	{
-		m = 127;
+		m = 63;
 	}
 	for (i = 0; i < m; i++)
 	{
 		dac = low + ((high - low) * i) / m;
 		g_Wave1[i] = dac;
 	}
-	for (; i < 128; i++)
+	for (; i < 64; i++)
 	{
-		dac = high - ((high - low) * (i - m)) / (128 - m);
+		dac = high - ((high - low) * (i - m)) / (63 - m);
 		g_Wave1[i] = dac;
 	}
 	
-	DACModel_Init((uint32_t)&g_Wave1, 128);
+	DACModel_Init((uint32_t)&g_Wave1, 32);
 }
