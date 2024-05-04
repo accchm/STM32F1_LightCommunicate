@@ -15,5 +15,9 @@
 
 int main(void)
 {
-	
+	DACModel_Init();
+    while(1)
+    {
+
+    }
 }
