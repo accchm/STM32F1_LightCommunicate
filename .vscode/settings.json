@@ -73,6 +73,7 @@
     "lcd.h": "c",
     "stm32_dsp.h": "c",
     "stm32f10x.h": "c",
-    "dac.h": "c"
+    "dac.h": "c",
+    "iic.h": "c"
   }
 }

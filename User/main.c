@@ -13,19 +13,35 @@
 #include "lcd.h"
 #include "DAC.h"
 
+void Send_Wendu(float wendu);
 
+uint8_t SendFlag = 0;
 float wendu = 25;
 int main(void)
 {
     OLED_Init();
+    Timer3_Init();
 	DAC1_Triangle_Wave(0,4095);
     DS18B20_Init();
     while(1)
     {
         wendu = DS18B20_GetTemperture();
-        OLED_ShowNum(0,0,wendu,2,16);
+        OLED_Show_Float(0,0,wendu,1,16);
         OLED_Refresh_Gram();
+        if(SendFlag)
+        {
+            Send_Wendu(wendu);
+        }
     }
+}
+
+void TIM3_IRQHandler(void)
+{
+	if(TIM_GetFlagStatus(TIM3,TIM_FLAG_Update) == SET)
+	{
+		SendFlag = 1;
+		TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
+	}
 }
 
 void Send_Wendu(float wendu)
