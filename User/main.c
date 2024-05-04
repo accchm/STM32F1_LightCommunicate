@@ -15,7 +15,7 @@
 
 int main(void)
 {
-	DACModel_Init();
+	DAC1_Triangle_Wave(0,4095);
     while(1)
     {
 

@@ -2,7 +2,7 @@
 Build target 'Target 1'
 compiling DAC.c...
 linking...
-Program Size: Code=1416 RO-data=320 RW-data=0 ZI-data=1024  
+Program Size: Code=1756 RO-data=320 RW-data=0 ZI-data=1280  
 FromELF: creating hex file...
 ".\Project.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
