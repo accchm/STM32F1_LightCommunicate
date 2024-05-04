@@ -42,6 +42,8 @@ void Send_Wendu(float wendu)
     temp = (uint16_t)(wendu);
     for(i = 0;i < 6;i++)
     {
+
+        
         if(temp&(1<<i))
         {
             TIM6->PSC = 72;
