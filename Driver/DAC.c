@@ -22,11 +22,7 @@ void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
         TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
         TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);   
         TIM_TimeBaseStructure.TIM_Period = 2 - 1;                        //
-        TIM_TimeBaseStructure.TIM_Prescaler = 32
-        
-        
-        
-         - 1;         
+        TIM_TimeBaseStructure.TIM_Prescaler = 32 - 1;         
         TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;      
         TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //设为向上计数  
         TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure); 
