@@ -36,7 +36,7 @@ void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
         TIM_SelectOutputTrigger(TIM6, TIM_TRGOSource_Update);
         /*                                    正弦波                */
         TIM_TimeBaseStructure.TIM_Period = 2 - 1;                        //
-        TIM_TimeBaseStructure.TIM_Prescaler =28 - 1;         //80K-7   40k-28
+        TIM_TimeBaseStructure.TIM_Prescaler =7 - 1;         //80K-7   40k-28
         TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;      
         TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //设为向上计数  
         TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure); 
@@ -68,6 +68,7 @@ void DACModel_Init(uint32_t Buf_Addr ,uint16_t Buf_Count)
         DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;								//模式，选择循环模式，与ADC的连续转换一致
         DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;          //优先级
         DMA_Init(DMA2_Channel3,&DMA_InitStructure);
+        
         DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
         DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;                     //16位数据
         DMA_InitStructure.DMA_BufferSize = 32;                               //转运次数

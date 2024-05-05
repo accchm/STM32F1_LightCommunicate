@@ -43,7 +43,7 @@ void Timer3_Init(void)
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;        //分频
 	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;         //计时模式 向上计时
-	TIM_TimeBaseInitStructure.TIM_Period = 10000 - 1;                                //自动重装值   每记一次数为10k分之一秒
+	TIM_TimeBaseInitStructure.TIM_Period = 20000 - 1;                                //自动重装值   每记一次数为10k分之一秒
 	TIM_TimeBaseInitStructure.TIM_Prescaler = 7200 - 1;                      //分频7200，频率就为10k
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;                //高级定时器专用
 	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStructure);

@@ -15,8 +15,8 @@
 
 void Send_Wendu(float wendu);
 
-#define FRE_15k 72
-#define FRE_30k 37
+#define FRE_40k 28
+#define FRE_80k 7
 
 uint8_t SendFlag = 0;
 float wendu = 25;
@@ -33,7 +33,7 @@ int main(void)
         OLED_Refresh_Gram();
         if(SendFlag)
         {
- //           Send_Wendu(wendu);
+            Send_Wendu(wendu);
             SendFlag = 0;
         }
     }
@@ -53,27 +53,27 @@ void Send_Wendu(float wendu)
     uint16_t temp = 0;
     uint8_t i = 0;
 
-    TIM6->CNT = 0;
-    TIM6->PSC = FRE_15k;
+    TIM4->CNT = 0;
+    TIM4->PSC = FRE_40k;
     Delay_ms(50);
-    TIM6->CNT = 0;
-    TIM6->PSC = FRE_30k;
+    TIM4->CNT = 0;
+    TIM4->PSC = FRE_80k;
     Delay_ms(50);
-    TIM6->CNT = 0;
-    TIM6->PSC = FRE_15k;
+    TIM4->CNT = 0;
+    TIM4->PSC = FRE_40k;
     Delay_ms(50);                    //起始信号
     temp = (uint16_t)(wendu);
     for(i = 0;i < 6;i++)
     {
         if(temp&(1<<i))
         {
-            TIM6->CNT = 0;
-            TIM6->PSC = FRE_30k;
+            TIM4->CNT = 0;
+            TIM4->PSC = FRE_80k;
         }
         else
         {
-            TIM6->CNT = 0;
-            TIM6->PSC = FRE_15k;
+            TIM4->CNT = 0;
+            TIM4->PSC = FRE_40k;
         }
         Delay_ms(50);
     }               //发送整数部分
@@ -84,16 +84,16 @@ void Send_Wendu(float wendu)
     {
         if(temp&(1<<i))
         {
-            TIM6->CNT = 0;
-            TIM6->PSC = FRE_30k;
+            TIM4->CNT = 0;
+            TIM4->PSC = FRE_80k;
         }
         else
         {
-            TIM6->CNT = 0;
-            TIM6->PSC = FRE_15k;
+            TIM4->CNT = 0;
+            TIM4->PSC = FRE_40k;
         }
         Delay_ms(50);
     }
-    TIM6->PSC = FRE_30k;
+    TIM4->PSC = FRE_80k;
 }
 
